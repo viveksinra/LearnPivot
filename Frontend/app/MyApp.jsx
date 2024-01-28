@@ -12,6 +12,8 @@ import Link from 'next/link';
 import { FcBusinessman,FcBusinesswoman,} from "react-icons/fc";
 import {authService} from "./services/index"
 import Loading from "./Components/Loading/Loading";
+import Hpage1 from './Components/PublicPage/HomePage/Hpage1';
+import HeroSec from './Components/PublicPage/HomePage/HeroSec';
 
 
 function MyApp() {  
@@ -40,29 +42,9 @@ function MyApp() {
       <Header />
       <Suspense fallback={<Loading />}>
         <TopAbstract />
-        <Box sx={{ background: "#fff", marginTop: "20px" }}>
-          <Container>
-            <Grid container spacing={4}>
-              <Grid item xs={12} md={6}>
-                <Typography variant="h2" color="#082952" gutterBottom>
-                  Welcome to Chelmsford
-                </Typography>
-                <Typography variant="h5">
-                  Dive into a world of knowledge with our vast array of learning resources. Whether you're a beginner or an expert, we have something for everyone. Explore new topics, sharpen your skills, and broaden your horizons. Let's embark on this journey of learning together.
-                </Typography>
-                <Box sx={{ display: 'flex', gap: '1rem', marginTop: '1rem',marginBottom: '1rem' }}>
-                  <Button variant="contained">Classes</Button>
-                  <Button variant="outlined">Test</Button>
-                </Box>
-          
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <div id="welcomeImg" />
-              </Grid>
-            </Grid>
-          </Container>
-        </Box>
-        <Box sx={{ marginTop: '2rem' }}>
+   <HeroSec />
+        <Hpage1 />
+        <Box >
           <Suspense fallback={<Loading />}>
             <Enquiry />
             <Suspense fallback={<Loading />}>

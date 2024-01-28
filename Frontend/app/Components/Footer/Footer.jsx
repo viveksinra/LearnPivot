@@ -6,7 +6,15 @@ import Link from 'next/link';
 import { FaAccessibleIcon,FaHospitalAlt,FaFacebook  } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
-  const amenities=["Best Team Care","Healthy Diet Plan", "Online Reports","Doctor on Call","Exercise & Fitness", "Peaceful Environment"];
+  const amenities = [
+    "Expert Instructor Team",
+    "Interactive Learning Plans",
+    "Progress Tracking",
+    "24/7 Learning Access",
+    "Engaging Exercises",
+    "Inspiring Virtual Environment"
+  ];
+  
   const links =[{label:"About Us",link:"about"},{label:"Amenities",link:"amenities"},{label:"Gallery",link:"gallery"},{label:"Pricing",link:"pricing"},{label:"Contact Us",link:"contact"},{label:"Privacy Policy",link:"privacy"}]
  
   return (
@@ -17,8 +25,10 @@ const Footer = () => {
             <Link href="/">
             <Image priority width={160} height={60} src="https://res.cloudinary.com/qualifier/image/upload/v1706185907/Logo/chelmsford-high-resolution-logo_vc9ewh.svg" alt="Chelmsford"/>
         </Link><br/><br/>
-        <Typography color="black" variant="subtitle1">Embrace a life of tranquility, luxury, and well-being at our premier senior living community, where independence thrives and care is paramount. </Typography>
-        <br/><Typography variant="body2" color="secondary">Chelmsford - The Home of Happiness</Typography>
+        <Typography color="black" variant="subtitle1">Embark on a journey of knowledge, innovation, and personal growth with our cutting-edge e-learning platform. Here, empowerment flourishes, and your educational aspirations take center stage.</Typography>
+<br />
+<Typography variant="body2" color="secondary">Your Platform - Igniting Minds, Shaping Futures</Typography>
+
             </Grid>
             <Grid item xs={12} md={3}>
             <Typography variant="h5" color="primary" style={{fontFamily: 'Courgette'}}>Our Amenities :-</Typography>

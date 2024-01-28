@@ -56,8 +56,8 @@ const Header = () => {
         <Hidden mdDown>
         <ul>
             <li><Link href="/about"> <Typography color="primary" variant="body1">About us</Typography></Link></li>
-            <li><Link href="/amenities"><Typography color="primary" variant="body1">Classes</Typography></Link></li>
-            <li><Link href="/"><Typography color="primary" variant="body1">Mock Test</Typography></Link></li>
+            <li><Link href="/classes"><Typography color="primary" variant="body1">Classes</Typography></Link></li>
+            <li><Link href="/mockTest"><Typography color="primary" variant="body1">Mock Test</Typography></Link></li>
             <li><Link href="/contact"><Typography color="primary" variant="body1">Contact Us</Typography></Link></li>
         </ul> 
         </Hidden>

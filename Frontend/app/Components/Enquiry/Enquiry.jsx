@@ -80,8 +80,13 @@ const Enquiry = () => {
             <Grid container>
                 <Grid item xs={12} lg={6}>
           
-                <Typography color="#082952" gutterBottom sx={{fontSize:{xs:"24px",md:"30px"},paddingTop:"100px", lineHeight:"1.2", fontWeight:300, fontFamily: "Adequate,Helvetica,\"sans-serif\""}}>Request More Information</Typography> <br/> <br/> <br/>
-                <p style={{fontFamily:"acumin-pro,\"sans-serif\"",fontWeight:200,fontSize:"20px",lineHeight:"2.5rem", color:"black"}}>To learn more about the benefits of a worry-free lifestyle at Chelmsford <br/> please complete and submit the form or call us at <Link href="tel:984-617-3905"><strong>(310) 995-4859</strong></Link> </p> <br/><br/>
+                <Typography color="#082952" gutterBottom sx={{ fontSize: { xs: "24px", md: "30px" }, paddingTop: "100px", lineHeight: "1.2", fontWeight: 300, fontFamily: "Adequate,Helvetica,\"sans-serif\"" }}>Inquire for More Information</Typography>
+<br /> <br /> <br />
+<p style={{ fontFamily: "acumin-pro,\"sans-serif\"", fontWeight: 200, fontSize: "20px", lineHeight: "2.5rem", color: "black" }}>
+  To discover more about the features and opportunities on our e-learning platform,
+  <br /> please fill out the form below or reach us at <Link href="tel:984-617-3905"><strong>9846173905</strong></Link>
+</p>
+<br /><br/>
 
                 </Grid>
                 <Grid item xs={12} lg={6}>

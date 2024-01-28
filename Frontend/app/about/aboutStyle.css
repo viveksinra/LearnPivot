@@ -1,12 +1,4 @@
-#heroAbout{
-    background-image: url("https://res.cloudinary.com/oasismanors/image/upload/v1706201014/About_jdlt9s.webp");
-    background-size: cover;	
-    object-fit: cover;
-    background-repeat: no-repeat;
-    height: 700px;
-    width: 100%;
-    z-index: -1;
-}
+
 #heroAbout:after{
     content: "";
     background-image: url("https://res.cloudinary.com/oasismanors/image/upload/v1704391434/Banner-texture_y57tn3.svg");
