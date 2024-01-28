@@ -1,0 +1,42 @@
+
+#livingBg{
+    background-image: url("https://www.ecsforseniors.org/cdn-cgi/image/format=auto/wp-content/uploads/2023/03/2.1_CAN_hero-2048x471.jpg");
+}
+#diningBg{
+    background-image: url("https://www.ecsforseniors.org/cdn-cgi/image/format=auto/wp-content/uploads/2023/03/2.3_CAN_hero-2048x896.jpg");
+}
+#careBg{
+    background-image: url("https://www.ecsforseniors.org/cdn-cgi/image/format=auto/wp-content/uploads/2023/03/3.0_CA_hero-2048x471.jpg");
+}
+#eventsBg{
+    background-image: url("https://www.ecsforseniors.org/cdn-cgi/image/format=auto/wp-content/uploads/2023/03/ECS_Events-Hero.jpg");
+}
+.choiceList{
+    font-size: 20px;
+    line-height: 1.5;
+    color: #333;
+    list-style-image: url('https://res.cloudinary.com/qualifier/image/upload/v1585479266/Default/check-mark_zbl05t.svg');
+}
+
+.creativeImg{
+    background-size: cover;	
+    object-fit: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+.viewBtn{
+    padding: 0px 30px 8px;
+    border-radius: 25px;
+    background-color: transparent;
+    color: #082952;
+    border: 2px solid #082952;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: acumin-pro, "sans-serif";
+    transition: all ease-in-out 0.2s;
+}
+.viewBtn:hover{
+    background-color: #082952;
+    color: #fff;
+}
