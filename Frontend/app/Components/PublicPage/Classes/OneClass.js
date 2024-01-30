@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 
 
@@ -21,6 +21,8 @@ const OneClass = ({key, img,title,timing,subTitle}) => {
         <button className="viewBtn">Register</button>
     </div>
     </Grid>
+    <Divider sx={{ marginTop: "5px" }} />
+
     </Grid> )
 
 }

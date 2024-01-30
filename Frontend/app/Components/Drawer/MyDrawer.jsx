@@ -8,7 +8,12 @@ import { authService } from "../../services";
 
 const MyDrawer = ({handleDrawer}) => {
 
-const list1 = [{title:"Home",icon:<FcHome/>, link:"/"},{title:"About Us",icon:<FcKindle/>, link:"/about"},{title:"Our Amenities",icon:<FcStackOfPhotos/>, link:"/amenities"},{title:"Gallery",icon:<FcPicture/>, link:"/gallery"},{title:"Pricing",icon:<FcCurrencyExchange/>, link:"/pricing"},{title:"Contact",icon:<FcInvite/>, link:"/contact"}]
+const list1 = [
+  {title:"Home",icon:<FcHome/>, link:"/"},
+  {title:"About Us",icon:<FcKindle/>, link:"/about"},
+  {title:"Classes",icon:<FcStackOfPhotos/>, link:"/classes"},
+  {title:"Mock Test",icon:<FcPicture/>, link:"/mockTest"},
+  {title:"Contact",icon:<FcInvite/>, link:"/contact"}]
   return (
     <div>
       <div id="topDrawer" style={{width:260}}>
