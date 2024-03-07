@@ -10,6 +10,7 @@ import { LedgerService } from "./ledger.service";
 import { PayReceiveService } from "./payReceive.service";
 import { InvoiceService } from "./invoice.service";
 import { AccessService } from "./access.service";
+import { prospectService } from "./prospect.service";
 
 import { API_ENDPOINT } from "../utils/index";
 import { MockTestService } from "./mockTest.service";
