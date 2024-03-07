@@ -10,7 +10,7 @@ import { LedgerService } from "./ledger.service";
 import { PayReceiveService } from "./payReceive.service";
 import { InvoiceService } from "./invoice.service";
 import { AccessService } from "./access.service";
-import { prospectService } from "./prospect.service";
+import { ProspectService } from "./prospect.service";
 
 import { API_ENDPOINT } from "../utils/index";
 import { MockTestService } from "./mockTest.service";
@@ -28,3 +28,4 @@ export const ledgerService = new LedgerService(API_ENDPOINT);
 export const payReceiveService = new PayReceiveService(API_ENDPOINT);
 export const invoiceService = new InvoiceService(API_ENDPOINT);
 export const accessService = new AccessService(API_ENDPOINT);
+export const prospectService = new ProspectService(API_ENDPOINT);
