@@ -754,8 +754,7 @@ const ComplianceTab = ({prospectId})=>{
     const [expiryDate, setExpiryDate ] = useState("");
     const [complianceRow, setRow]= useState([]);
     const [resForm, setResForms] = useState([]);
-    const [selector, setSelector] = useState({open:false});
-    const [uploader, setUploader] = useState({open:false});
+
     useEffect(() => {
         async function getData() {
           try {
