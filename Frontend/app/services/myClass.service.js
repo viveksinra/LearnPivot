@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAuthorizationHeader } from "../utils/getAuthorizationHeader";
 import qs from "qs";
 
-export class ProspectService {
+export class MyClassService {
   instance;
   constructor(url) {
     this.instance = axios.create({
@@ -12,9 +12,16 @@ export class ProspectService {
     });
   }
 
+  publicGetAll = async ( data) => {
+    return this.instance
+      .post(`/api/v1/publicMaster/myClass/getMyClass/forPublicPage`, data, {
+        
+      })
+      .then((res) => res.data);
+  };
   add = async (id, data) => {
     return this.instance
-      .post(`/api/v1/enquiry/prospect/addProspect/${id}`, data, {
+      .post(`/api/v1/publicMaster/myClass/addMyClass/${id}`, data, {
         headers: getAuthorizationHeader(),
       })
       .then((res) => res.data);
@@ -22,7 +29,7 @@ export class ProspectService {
 
   getAll = async (searchUrl) => {
     return this.instance
-      .get(`/${searchUrl}`, {
+      .get(`/api/v1/publicMaster/myClass/getMyClass/getDataWithPage/${searchUrl}`, {
         headers: getAuthorizationHeader(),
       })
       .then((res) => res.data);
@@ -30,11 +37,27 @@ export class ProspectService {
 
   getOne = async (id) => {
     return this.instance
-      .get(`/api/v1/enquiry/prospect/getProspect/getOne/${id}`, {
+      .get(`/api/v1/publicMaster/myClass/getMyClass/getOne/${id}`, {
         headers: getAuthorizationHeader(),
       })
       .then((res) => res.data);
   };
+  deleteClass = async (baseUrl) => {
+    return this.instance
+      .delete(`/${baseUrl}`, {
+        headers: getAuthorizationHeader(),
+      })
+      .then((res) => res.data)
+      .catch((err) => err);
+  };
+
+
+
+
+
+
+
+
   saveHealth = async (id, data) => {
     return this.instance
       .post(`/api/v1/enquiry/health/addHealth/${id}`, data, {
@@ -159,6 +182,7 @@ export class ProspectService {
       .then((res) => res.data)
       .catch((err) => err);
   };
+
   deleteLeave = async (baseUrl) => {
     return this.instance
       .delete(`/${baseUrl}`, {
@@ -167,6 +191,7 @@ export class ProspectService {
       .then((res) => res.data)
       .catch((err) => err);
   };
+
   delete = async (id) => {
     return this.instance
       .delete(`/api/v1/customer/addCustomer/deleteOne/${id}`, {

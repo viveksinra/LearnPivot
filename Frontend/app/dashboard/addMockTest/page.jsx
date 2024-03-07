@@ -1,28 +1,29 @@
 'use client';
-import "./prospectStyle.css";
+import "./addMockTestStyle.css";
 import React, { lazy, Suspense, useEffect } from 'react'
 import {Typography, Fab,styled,Avatar,CircularProgress,Rating,Badge,ToggleButtonGroup,ToggleButton,Tab, Grid,ButtonGroup,AppBar,Toolbar, Button,Tooltip, Chip, Table,TableRow,TableCell,TableBody, TableHead, IconButton,TablePagination} from '@mui/material/';
 import { useState,useRef} from 'react';
 import {TabContext,TabList } from '@mui/lab/';
-import { prospectService } from "../../services";
+import { mockTestService } from "../../services";
 import Link from 'next/link';
 import { FiCheck,FiFileMinus } from "react-icons/fi";
-import {FcLike,FcLikePlaceholder,FcOrgUnit,FcTimeline,FcExpand} from "react-icons/fc";
+import {FcOk,FcNoIdea,FcOrgUnit,FcTimeline,FcExpand} from "react-icons/fc";
 import {MdModeEdit,MdSend,MdOutlineClose} from "react-icons/md";
 import NoResult from "@/app/Components/NoResult/NoResult";
 import Search from "../../Components/Search";
 import {FaUserPlus } from "react-icons/fa";
 import {BsTable } from "react-icons/bs";
 import Loading from "../../Components/Loading/Loading";
-const EntryArea = lazy(() => import("./EntryArea"));
+import LiveAvatar from "@/app/Components/Common/LiveAvatar";
+const AddMockEntryArea = lazy(() => import("./AddMockEntryArea"));
 
-function   Prospect () {
+function   MyMockTest () {
   const [viewTabular,toggleView] = useState(true);
   const [id, setId] =useState("");
   const entryRef = useRef();
   return (
     <main> 
-      {viewTabular ? <Suspense fallback={<Loading/>}><SearchArea handleEdit={(id)=>{toggleView(false); setId(id)}} />  </Suspense>  : <Suspense fallback={null}><EntryArea ref={entryRef} id={id} setId={id=>setId(id)} /></Suspense>}
+      {viewTabular ? <Suspense fallback={<Loading/>}><SearchArea handleEdit={(id)=>{toggleView(false); setId(id)}} />  </Suspense>  : <Suspense fallback={null}><AddMockEntryArea ref={entryRef} id={id} setId={id=>setId(id)} /></Suspense>}
       <AppBar position="fixed" sx={{ top: 'auto', bottom: 0,background:"#d6f9f7"}}>
       <Toolbar variant="dense">
         <span style={{flexGrow:0.2}}/>
@@ -30,7 +31,7 @@ function   Prospect () {
             Clear
           </Button> }
         <span style={{flexGrow:0.3}}/>
-        <Tooltip arrow title={viewTabular ? "Add Prospect" : "Show All"}>
+        <Tooltip arrow title={viewTabular ? "Add MyMockTest" : "Show All"}>
         <ToggleFab onClick={()=>toggleView(!viewTabular)} color="secondary" size="medium">
         {viewTabular ?   <FaUserPlus style={{fontSize:24}}/> : <BsTable style={{fontSize:24}}/>}
         </ToggleFab>
@@ -58,19 +59,22 @@ export function SearchArea({handleEdit}) {
   const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([]);
   const [tabular, setView] = useState(false);
-  const sortOptions = [{label:"New First",value:"newToOld"},{label:"Rating",value:"rating"},{label:"Important",value:"important"},{label:"Old First",value:"oldToNew"}];
+  const sortOptions = [{label:"New First",value:"newToOld"},{label:"Published",value:"isPublished"},{label:"Old First",value:"oldToNew"}];
   const [sortBy, setSort]= useState("newToOld");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
+  const [totalCount,setTotalCount] = useState(0)
 
   useEffect(() => {
     async function fetchAllData() {
       setLoading(true)
-      let response = await prospectService.getAll(`api/v1/enquiry/prospect/getProspect/getDataWithPage/${sortBy}/${rowsPerPage}/${page}/${searchText}`);
+      let response = await mockTestService.getAll(`${sortBy}/${rowsPerPage}/${page}/${searchText}`);
+     console.log(response)
       if(response.variant === "success"){
         setLoading(false)
         setRows(response.data)
+        setTotalCount(response.totalCount)
       }else {console.log(response); setLoading(false)}
     }
     fetchAllData()
@@ -80,7 +84,7 @@ export function SearchArea({handleEdit}) {
         <Grid container>
           <Grid item xs={0} md={5}/>
           <Grid item xs={12} md={2}>
-          <Typography color="slateblue" style={{fontFamily: 'Courgette'}} variant='h6' align='center'>All Prospects</Typography>
+          <Typography color="slateblue" style={{fontFamily: 'Courgette'}} variant='h6' align='center'>All Mock Test</Typography>
           </Grid>
           <Grid item xs={12} md={5} sx={{display:"flex", justifyContent:"end", marginBottom:"20px"}}>
           <Search onChange={e=>setSearchText(e.target.value)} value={searchText} fullWidth endAdornment={<IconButton size="small" sx={{display: searchText ? "block": "none"}} onClick={()=>setSearchText("")}> <MdOutlineClose /></IconButton> } />
@@ -106,68 +110,75 @@ export function SearchArea({handleEdit}) {
           </Grid> 
         </Grid>
        
-      {loading ? <div className="center" style={{flexDirection:"column"}}><CircularProgress size={30}/> <Typography color="slateblue" style={{fontFamily: 'Courgette'}} variant='h6' align='center'>Loading prospect...</Typography>  </div> : rows.length === 0 ? <NoResult label="No Prospect Available"/> : tabular ? <Table size="small" sx={{display:{xs:"none", md:"block"}}} aria-label="Prospect data Table"> 
+      {loading ? <div className="center" style={{flexDirection:"column"}}><CircularProgress size={30}/> <Typography color="slateblue" style={{fontFamily: 'Courgette'}} variant='h6' align='center'>Loading MyMockTest...</Typography>  </div> : rows.length === 0 ? <NoResult label="No MyMockTest Available"/> : tabular ? <Table size="small" sx={{display:{xs:"none", md:"block"}}} aria-label="MyMockTest data Table"> 
       <TableHead>
       <TableRow>
       <TableCell align="left" padding="none" ></TableCell>
-      <TableCell align="left">Full Name </TableCell>
-      <TableCell align="left">Inquiry Date</TableCell>
-      <TableCell align="left">Prospect Stage</TableCell>
-      <TableCell align="left">Conversion Chance</TableCell>
-      <TableCell align="left">Phone No.</TableCell>
-      <TableCell align="left">Email  Id</TableCell>
-      <TableCell align="left">City & State</TableCell>
+      <TableCell align="left">Mock Test Title </TableCell>
+      <TableCell align="left">Start Date</TableCell>
+      <TableCell align="left">End Date</TableCell>
+      <TableCell align="left">Test Class</TableCell>
+      <TableCell align="left">Test Type</TableCell>
+      <TableCell align="left">Duration</TableCell>
       <TableCell align="center">Action</TableCell>
       </TableRow>
       </TableHead>
       <TableBody>
-      {rows && rows.map((r,i)=>  <TableRow key={r._id}> 
-        <TableCell align="left" padding="none"> <Badge color="primary" variant="dot" invisible={!Boolean(r.important)}><Avatar alt={r.firstName} src={r.userImage} /> </Badge> </TableCell>
-        <TableCell align="left">{`${r.firstName} ${r.lastName} `} </TableCell>
-        <TableCell align="left">{r.inquiryDate}</TableCell>
-        <TableCell align="left"><Chip label={r.prospectStage} variant="outlined" size="small"  /></TableCell>      
-        <TableCell align="left"><Rating value={r.prospectScore} readOnly /></TableCell>
-        <TableCell align="left">{r.phone}</TableCell>
-        <TableCell align="left">{r.email}</TableCell>
-        <TableCell align="left">{`${r.city}, ${r.state}`}</TableCell>
+      {rows && rows.map((r,i)=>  <TableRow key={r._id} > 
+        <TableCell align="left" padding="none"> <Badge color="primary" variant="dot" invisible={!Boolean(r.isPublished)}>
+          <LiveAvatar 
+isLive={r.isPublished} alt={r.mockTestTitle} src={r.url} 
+/>
+          </Badge> </TableCell>
+        <TableCell align="left">{`${r.mockTestTitle}`} </TableCell>
+        <TableCell align="left">{r.startDate}</TableCell>
+        <TableCell align="left"><Chip label={r.endDate} variant="outlined" size="small"  /></TableCell>      
+        <TableCell align="left">{r.testClass?.label}</TableCell>
+        <TableCell align="left">{r.testType?.label}</TableCell>
+        <TableCell align="left"><Chip label={r.duration?.label} variant="outlined" size="small"  /></TableCell>      
+    
         <TableCell align="center">
         <ButtonGroup variant="text" aria-label="">
       <Button onClick={()=>handleEdit(r._id)} variant="text" startIcon={<MdModeEdit />}>Edit</Button>
-       <Link href={`/dashboard/prospect/${r._id}`}><Button variant="text" endIcon={<MdSend />}>View</Button></Link> 
+       {/* <Link href={`/dashboard/prospect/${r._id}`}><Button variant="text" endIcon={<MdSend />}>View</Button></Link>  */}
        <Button  variant="text"></Button>
     </ButtonGroup>
         </TableCell>
       </TableRow> )}
       </TableBody>
       </Table> : <Grid container spacing={2}>
-      {rows && rows.map((c,i)=> <Grid item key={i} xs={12} md={4} className="center">
-          <div className="prospectCard">
-          <Avatar alt={c.firstName} src={c.userImage} sx={{width: "100px", height: "100px", position: "absolute", boxShadow: "rgba(0, 0, 0, 0.3) 0px 4px 12px", marginTop: "-20px"}}/>
-          <Typography color="teal" variant="h6" sx={{paddingLeft:"120px"}}>{c.firstName} {`${c.lastName}`}</Typography>
+      {rows && rows.map((c,i)=> 
+      <Grid item key={i} xs={12} md={4} className="center">
+          <div className="prospectCard" style={c.isPublished ? {backgroundColor:"#e3ffea"} : {backgroundColor:"#ffffe6"}}>    
+<LiveAvatar 
+isLive={c.isPublished} alt={c.mockTestTitle} src={c.url} sx={{width: "100px", height: "100px", position: "absolute", boxShadow: "rgba(0, 0, 0, 0.3) 0px 4px 12px", marginTop: "-20px"}}
+/>
+
+          <Typography color="teal" variant="h6" sx={{paddingLeft:"120px"}}>{c.mockTestTitle} </Typography>
           <Grid container sx={{paddingLeft:"120px"}}>
             <Grid item xs={10}> 
-            <Typography color="grey" variant="subtitle2" >{c.prospectStage}</Typography>
-            <Rating value={c.prospectScore} readOnly />
+            <Typography color="grey" variant="subtitle2" >{c.startDate}</Typography>
+            <Typography color="grey" variant="subtitle2" >{c.startDate} to {c.endDate}</Typography>
             </Grid>
-            <Grid item xs={2}>{c.important ? <FcLike /> : <FcLikePlaceholder/>}</Grid>
+            <Grid item xs={2}>{c.isPublished ? <FcOk sx={{ fontSize: 50 }}/> : <FcNoIdea sx={{ fontSize: 50 }}/>} </Grid>
           </Grid>      
-          <Table size="small" sx={{minHeight:'180px'}} aria-label="Prospect data Table">
+          <Table size="small" sx={{minHeight:'180px'}} aria-label="MyMockTest data Table">
           <TableBody>
           <TableRow>
-          <TableCell align="left" sx={{width:"100px"}}>Inquiry Date </TableCell>
-          <TableCell align="right" sx={{width:"120px"}}>{c.inquiryDate}</TableCell>
+          <TableCell align="left" sx={{width:"100px"}}>Test Class </TableCell>
+          <TableCell align="right" sx={{width:"120px"}}>{c.testClass?.label}</TableCell>
           </TableRow>
           <TableRow>
-          <TableCell align="left">Phone </TableCell>
-          <TableCell align="right">{c.phone}</TableCell>
+          <TableCell align="left">Test Type </TableCell>
+          <TableCell align="right">{c.testType?.label}</TableCell>
           </TableRow>
           <TableRow>
-          <TableCell align="left">Email </TableCell>
-          <TableCell align="right"><Typography variant="caption">{c.email}</Typography></TableCell>
+          <TableCell align="left">Duration </TableCell>
+          <TableCell align="right"><Typography variant="caption">{c.duration?.label}</Typography></TableCell>
           </TableRow>
           <TableRow>
-          <TableCell align="left">Address </TableCell>
-          <TableCell align="right"><Typography variant="caption">{c.streetAddress}</Typography><Typography variant="caption">{`${c.city}, ${c.state}`}</Typography> </TableCell>
+          <TableCell align="left">Short Description </TableCell>
+          <TableCell align="right"><Typography variant="caption">{c.shortDescription}</Typography> </TableCell>
           </TableRow>
           </TableBody>
           </Table>
@@ -175,17 +186,18 @@ export function SearchArea({handleEdit}) {
           <Button size="small" onClick={()=>handleEdit(c._id)}  variant="outlined" startIcon={<MdModeEdit />}>
            Edit
           </Button>
-          <Link href={`/dashboard/prospect/${c._id}`}><Button size="small" variant="contained" endIcon={<MdSend />}>
-            Explore
-          </Button></Link>
+    
           </div>
           </div>
         </Grid>)}
-        <Grid item xs={12}>
-        <TablePagination
-                rowsPerPageOptions={[10,20,50,100]}
+        <Grid item xs={12}>   
+        </Grid>
+    </Grid> }
+   <br/>
+   <TablePagination
+                rowsPerPageOptions={[5,10,15,100]}
                 component="div"
-                count={rows.length}
+                count={totalCount}
                 sx={{overflowX:"hidden"}}
                 rowsPerPage={rowsPerPage}
                 page={page}
@@ -195,16 +207,9 @@ export function SearchArea({handleEdit}) {
                   setPage(0)
                 }}
               />
-        </Grid>
-    </Grid> }
-   <br/>
-    
     <br/> <br/> <br/>
     </main>
   )
 }
 
-
-
-
-export default Prospect;
+export default MyMockTest;

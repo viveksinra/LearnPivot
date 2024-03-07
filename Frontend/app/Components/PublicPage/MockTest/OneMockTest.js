@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Divider, Grid, Typography, Chip, Button } from "@mui/material";
 import BuyDialog from "../BuyForm/BuyDialog";
-const OneClass = ({ data }) => {
+const OneMockTest = ({ data }) => {
 
   return (
     <Grid container key={data._id} spacing={4}>
@@ -9,7 +9,7 @@ const OneClass = ({ data }) => {
         <img
           src={data.url}
           className="creativeImg"
-          alt={data.classTitle}
+          alt={data.mockTestTitle}
         />
       </Grid>
       <Grid item xs={12} md={8}>
@@ -23,7 +23,7 @@ const OneClass = ({ data }) => {
             fontFamily: "Adequate, Helvetica Neue, Helvetica, sans-serif",
           }}
         >
-         {data.classTitle}
+         {data.mockTestTitle}
         </Typography>
         <Typography
           color="#082952"
@@ -34,7 +34,7 @@ const OneClass = ({ data }) => {
             fontFamily: "Adequate, Helvetica Neue, Helvetica, sans-serif",
           }}
         >
-          from {data.date} @ {data.startTime} to {data.endTime}
+          from {data.date} to {data.endDate}
         </Typography>
         <Typography
           color="#333"
@@ -48,13 +48,13 @@ const OneClass = ({ data }) => {
         {data.shortDescription}
           <div style={{ display: "flex", marginTop: "10px" }}>
           <Chip
-                label={`Class: ${data.courseClass?.label}`}
+                label={`Mock Test: ${data.testClass?.label}`}
                 color="primary"
                 variant="contained"
                 sx={{ marginRight: "8px" }}
               />
                 <Chip
-                label={`Type: ${data.courseType?.label}`}
+                label={`Type: ${data.testType?.label}`}
                 color="primary"
                 variant="contained"
                 sx={{ marginRight: "8px" }}
@@ -81,4 +81,4 @@ const OneClass = ({ data }) => {
   );
 };
 
-export default OneClass;
+export default OneMockTest;

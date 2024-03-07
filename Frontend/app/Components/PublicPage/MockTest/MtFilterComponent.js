@@ -15,15 +15,17 @@ const FilterComponent = () => {
       {
       title:"Type",
       tags:[
-        {label:"Crash Course",id:"crashCourse"},
-        {label:"Full Course",id:"fullCourse"},
+        { label: "Initial Test", id: "initialTest" },
+        { label: "After Course", id: "afterCourseTest" },
       ]
     },
       {
       title:"Duration",
       tags:[
-        {label:"3 Months",id:"3months"},
-        {label:"1 Years",id:"1years"},
+        { label: "30 Minutes", id: "30minutes" },
+        { label: "1 Hours", id: "1hours" },
+        { label: "2 Hours", id: "2hours" },
+        { label: "3 Hours", id: "3hours" },
       ]
     },
   ]

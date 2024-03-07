@@ -36,7 +36,7 @@ const Header = () => {
             <Hidden mdDown> 
             <div className="dataBox">
             <MdLocationOn style={{fontSize:24,marginRight:10}} />
-            <Typography color="primary" variant="body1">Mahavir Narag, Araria</Typography>
+            <Typography color="primary" variant="body1">Mahavir Nagar, Araria</Typography>
             </div>
             </Hidden>
           </div>

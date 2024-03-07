@@ -3,7 +3,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 
 const Hpage1 = () => {
   return (
-    <Box sx={{ background: "#fff", margin: "0 10px", marginTop: "20px" }}>
+    <Box sx={{ background: "#fff", margin: "0 10px",  }}>
       <br />
       <Grid container spacing={2} sx={{ background: "#fff" }}>
         <Grid item xs={12}>
