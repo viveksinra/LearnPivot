@@ -105,11 +105,16 @@ const getComplianceDocs = require("./routes/api/v1/common/complianceDocs/getComp
 const addFilterTag = require("./routes/api/v1/publicMaster/filterTag/addFilterTag");
 const getFilterTag = require("./routes/api/v1/publicMaster/filterTag/getFilterTag");
 // Public Master
-const addMyClass = require("./routes/api/v1/publicMaster/myClass/addMyClass");
-const getMyClass = require("./routes/api/v1/publicMaster/myClass/getMyClass");
+const addCourse = require("./routes/api/v1/publicMaster/course/addCourse");
+const getCourse = require("./routes/api/v1/publicMaster/course/getCourse");
 // Public Master
 const addMockTest = require("./routes/api/v1/publicMaster/mockTest/addMockTest");
 const getMockTest = require("./routes/api/v1/publicMaster/mockTest/getMockTest");
+
+// Stripe Pay
+const stripePay = require("./routes/api/v1/publicMaster/stripePayment/stripePay");
+// Public Master
+const addBuyCourse = require("./routes/api/v1/publicMaster/buyCourse/addBuyCourse");
 
 
 
@@ -246,10 +251,15 @@ app.use("/api/v1/common/complianceDocs/getComplianceDocs", getComplianceDocs);
 app.use("/api/v1/filterTag/addFilterTag", addFilterTag);
 app.use("/api/v1/filterTag/getFilterTag", getFilterTag);
 // Public Master
-app.use("/api/v1/publicMaster/myClass/addMyClass", addMyClass);
-app.use("/api/v1/publicMaster/myClass/getMyClass", getMyClass);
+app.use("/api/v1/publicMaster/course/addCourse", addCourse);
+app.use("/api/v1/publicMaster/course/getCourse", getCourse);
 app.use("/api/v1/publicMaster/mockTest/addMockTest", addMockTest);
 app.use("/api/v1/publicMaster/mockTest/getMockTest", getMockTest);
+//
+app.use("/api/v1/publicMaster/stripePayment/stripePay", stripePay);
+// buy course 
+app.use("/api/v1/publicMaster/buyCourse/addBuyCourse", addBuyCourse);
+
 
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"), function(

@@ -1,16 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const MyClassSchema = new Schema({
+const CourseSchema = new Schema({
   
     isPublished:{
     type: Boolean,
     default: false
   },
-  startDate:{
-    type: Date,
-    required: true
-  },
+  dates:[],
  
   startTime:{
     type: String,
@@ -20,11 +17,11 @@ const MyClassSchema = new Schema({
     type: String,
     required: true
   },
-  classTitle:{
+  courseTitle:{
     type: String,
     required: true
   },
-  classLink:{
+  courseLink:{
     type: String,
     required: true
   },
@@ -62,6 +59,14 @@ const MyClassSchema = new Schema({
         required: true
       }, 
   },
+  oneClassPrice:{
+    type:Number,
+    required:true
+  },
+  discountOnFullClass:{
+    type:Number,
+    default:0
+  },
   url:{
     type: String,
     required: true
@@ -96,4 +101,4 @@ const MyClassSchema = new Schema({
   }
 });
 
-module.exports = MyClass = mongoose.model("myMyClass", MyClassSchema);
+module.exports = Course = mongoose.model("myCourse", CourseSchema);

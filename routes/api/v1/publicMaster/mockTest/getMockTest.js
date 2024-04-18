@@ -62,7 +62,7 @@ res.status(200).json(resp);
         const { sort, limit, pageNumber, search } = req.params;
   
         let myMatch = {
-          classTitle: { $regex: new RegExp(search, "i") },
+          courseTitle: { $regex: new RegExp(search, "i") },
           // Add more fields as needed for searching
         };
   
@@ -97,11 +97,11 @@ res.status(200).json(resp);
       .limit(parseInt(limit) || 10)
       .sort(sortBy);
   
-    const modifiedDataPromises = allMockTest.map((classData) => ({
-      ...classData.toObject(),
-      startDate: formatDateToShortMonth(classData.startDate),
-      endDate: formatDateToShortMonth(classData.endDate),
-      date: formatDateToShortMonth(classData.date),
+    const modifiedDataPromises = allMockTest.map((courseData) => ({
+      ...courseData.toObject(),
+      startDate: formatDateToShortMonth(courseData.startDate),
+      endDate: formatDateToShortMonth(courseData.endDate),
+      date: formatDateToShortMonth(courseData.date),
     }));
   
     const modifiedData = await Promise.all(modifiedDataPromises);
@@ -182,7 +182,7 @@ router.get(
           try {
             const mydata = await MockTest.aggregate([
               {$match:{$or: [              
-                { classTitle: new RegExp(search, "i") },              
+                { courseTitle: new RegExp(search, "i") },              
               
             ]}},
           

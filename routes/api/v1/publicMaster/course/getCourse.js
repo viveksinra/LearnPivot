@@ -7,7 +7,7 @@ const { formatDateToShortMonth, formatDateToMmDdYyyy, formatDateToISO } = requir
 
 
   // @type    GET
-  // @route   /api/v1/publicMaster/myClass/getMyClass/forPublicPage
+  // @route   /api/v1/publicMaster/course/getCourse/forPublicPage
   // @desc    Get ledgers with pagination
   // @access  Public
   router.post(
@@ -30,8 +30,34 @@ res.status(200).json(resp);
       }
     }
   );
+
   // @type    GET
-  // @route   /api/v1/publicMaster/myClass/getMyClass/getDataWithPage/:type/:limit/:PageNumber
+  // @route   /api/v1/publicMaster/course/getCourse/forPublicPage/:id
+  // @desc    Get ledgers with pagination
+  // @access  Public
+  router.get(
+    "/forPublicPage/:id",
+    async(req, res) => {
+      try {
+ const oneCourse = await Course.findOne({_id:req.params.id}).catch(err => console.log(err))
+
+res.status(200).json({
+  data:oneCourse,
+  message:"One Course Data got loaded",
+  variant:"success"
+});
+
+      } catch (error) {
+  console.log(error)
+        res.status(500).json({
+          variant: "error",
+          message: "Internal server error" + error.message,
+        });
+      }
+    }
+  );
+  // @type    GET
+  // @route   /api/v1/publicMaster/course/getCourse/getDataWithPage/:type/:limit/:PageNumber
   // @desc    Get ledgers with pagination
   // @access  Public
   router.get(
@@ -54,7 +80,7 @@ res.status(200).json(resp);
     }
   );
   // @type    GET
-  // @route   /api/v1/publicMaster/publicMaster/myClass/getMyClass/getDataWithPage/:type/:limit/:PageNumber/:search
+  // @route   /api/v1/publicMaster/publicMaster/course/getCourse/getDataWithPage/:type/:limit/:PageNumber/:search
   // @desc    Get ledgers with pagination
   // @access  Public
   router.get(
@@ -65,7 +91,7 @@ res.status(200).json(resp);
         const { sort, limit, pageNumber, search } = req.params;
   
         let myMatch = {
-          classTitle: { $regex: new RegExp(search, "i") },
+          courseTitle: { $regex: new RegExp(search, "i") },
           // Add more fields as needed for searching
         };
   
@@ -86,40 +112,51 @@ res.status(200).json(resp);
   const comGetAllAndSearch = async (myMatch, sort, limit, pageNumber) => {
     const page = parseInt(pageNumber) || 0;
     let sortBy = { date: -1 };
-  
+
     if (sort === "oldToNew") {
-      sortBy = { date: 1 };
+        sortBy = { date: 1 };
     } else if (sort === "isPublished") {
-      sortBy = { isPublished: -1 };
+        sortBy = { isPublished: -1 };
     }
-  
-    const totalCount = await MyClass.countDocuments(myMatch);
-  
-    const allMyClass = await MyClass.find(myMatch)
-      .skip(page * limit)
-      .limit(parseInt(limit) || 10)
-      .sort(sortBy);
-  
-    const modifiedDataPromises = allMyClass.map((classData) => ({
-      ...classData.toObject(),
-      startDate: formatDateToShortMonth(classData.startDate),
-      date: formatDateToShortMonth(classData.date),
-    }));
-  
+
+    const totalCount = await Course.countDocuments(myMatch);
+
+    const allCourse = await Course.find(myMatch)
+        .skip(page * limit)
+        .limit(parseInt(limit) || 10)
+        .sort(sortBy);
+
+    const modifiedDataPromises = allCourse.map(async (courseData) => {
+        const firstDate = await GetStartDate(courseData.dates);
+        const formattedDate = formatDateToShortMonth(courseData.date);
+        return {
+            ...courseData.toObject(),
+            firstDate,
+            date: formattedDate,
+        };
+    });
+
     const modifiedData = await Promise.all(modifiedDataPromises);
-  
+
     return {
-      variant: "success",
-      message: "MyClass Loaded",
-      data: modifiedData,
-      page,
-      totalCount,
+        variant: "success",
+        message: "Course Loaded",
+        data: modifiedData,
+        page,
+        totalCount,
     };
-  };
+};
+const GetStartDate = (dates) => {
+  if (dates && dates.length > 0 && dates[0].length > 0) {
+      return dates[0][0];
+  }
+  return null; // or any default value you prefer if dates array is empty or malformed
+};
+
   
   // @type    GET
-// @route   /api/v1/publicMaster/myClass/getMyClass/getOne/:id
-// @desc    Get a myClass by ID
+// @route   /api/v1/publicMaster/course/getCourse/getOne/:id
+// @desc    Get a course by ID
 // @access  Public
 
 router.get(
@@ -127,14 +164,13 @@ router.get(
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       try {
-        let myMyClass = await MyClass.findById(req.params.id);
-        myMyClass.startData = formatDateToISO(myMyClass.startData)
-      let data =  { ...myMyClass.toObject(),
-              startDate : formatDateToISO(myMyClass.startDate),          
+        let myCourse = await Course.findById(req.params.id);
+        myCourse.startData = formatDateToISO(myCourse.startData)
+      let data =  { ...myCourse.toObject(),
              }
         res.status(200).json({
           variant: "success",
-          message: "MyClass Loaded",
+          message: "Course Loaded",
           data: data,
         });
       } catch (error) {
@@ -148,8 +184,8 @@ router.get(
   );
 
  // @type    GET
-  // @route   /api/v1/publicMaster/myClass/getMyClass/getAll
-  // @desc    Get all myClasss
+  // @route   /api/v1/publicMaster/course/getCourse/getAll
+  // @desc    Get all courses
   // @access  Public
   router.get(
     "/getAll",
@@ -158,11 +194,11 @@ router.get(
      
       try {
 
-        const myData = await MyClass.find({})
+        const myData = await Course.find({})
    
         res
           .status(200)
-          .json({ variant: "success", message: "MyClass Loaded", data: myData.reverse() });
+          .json({ variant: "success", message: "Course Loaded", data: myData.reverse() });
       } catch (error) {
         console.log(error)
         res.status(500).json({ variant: "error", message: "Internal server error" + error.message});
@@ -170,8 +206,8 @@ router.get(
     }
   );
    // @type    GET
-  // @route   /api/v1/publicMaster/myClass/getMyClass/getAll
-  // @desc    Get all myClasss
+  // @route   /api/v1/publicMaster/course/getCourse/getAll
+  // @desc    Get all courses
   // @access  Public
   router.get(
     "/getAll/:search",
@@ -180,9 +216,9 @@ router.get(
           const search = req.params.search; 
         
           try {
-            const mydata = await MyClass.aggregate([
+            const mydata = await Course.aggregate([
               {$match:{$or: [              
-                { classTitle: new RegExp(search, "i") },              
+                { courseTitle: new RegExp(search, "i") },              
               
             ]}},
           
@@ -201,8 +237,8 @@ router.get(
   );
 
   // @type    GET
-  // @route   /api/v1/publicMaster/publicMaster/myClass/getMyClass/dropdown/getLedger
-  // @desc    Get all myClasss
+  // @route   /api/v1/publicMaster/publicMaster/course/getCourse/dropdown/getLedger
+  // @desc    Get all courses
   // @access  Public
   router.get(
     "/dropdown/getLedger",
@@ -260,7 +296,7 @@ router.get(
         var dataToSend = modifiedData.concat(modifiedData2, modifiedData3);
         res
           .status(200)
-          .json({ variant: "success", message: "MyClass Loaded", data: dataToSend });
+          .json({ variant: "success", message: "Course Loaded", data: dataToSend });
       } catch (error) {
         console.log(error)
         res.status(500).json({ variant: "error", message: "Internal server error" + error.message});

@@ -8,7 +8,7 @@ const {
   validateOnCreate,
   validateOnUpdate,
   validateOnDelete
-} = require("../../../../../validation/publicMaster/myClassValidation");
+} = require("../../../../../validation/publicMaster/courseValidation");
 const FilterTag = require("../../../../../Models/Private/PublicMaster/FilterTag");
 
 // @type    POST
