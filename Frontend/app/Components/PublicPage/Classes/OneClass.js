@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Divider, Grid, Typography, Chip, Button } from "@mui/material";
-import BuyDialog from "../BuyForm/BuyDialog";
+import Link from "next/link";
 const OneClass = ({ data }) => {
 
   return (
@@ -9,7 +9,7 @@ const OneClass = ({ data }) => {
         <img
           src={data.url}
           className="creativeImg"
-          alt={data.classTitle}
+          alt={data.courseTitle}
         />
       </Grid>
       <Grid item xs={12} md={8}>
@@ -23,7 +23,7 @@ const OneClass = ({ data }) => {
             fontFamily: "Adequate, Helvetica Neue, Helvetica, sans-serif",
           }}
         >
-         {data.classTitle}
+         {data.courseTitle}
         </Typography>
         <Typography
           color="#082952"
@@ -34,7 +34,7 @@ const OneClass = ({ data }) => {
             fontFamily: "Adequate, Helvetica Neue, Helvetica, sans-serif",
           }}
         >
-          from {data.date} @ {data.startTime} to {data.endTime}
+          from {data.firstDate} @ {data.startTime} to {data.endTime}
         </Typography>
         <Typography
           color="#333"
@@ -69,9 +69,10 @@ const OneClass = ({ data }) => {
         </Typography>
         <br />
         <div style={{ display: "flex" }}>
-        <BuyDialog />
+        <Link href={"/course/buy/" + data._id}>
+        <button className="viewBtn">Quick Buy</button></Link>
           <span style={{ flexGrow: 0.1 }} />
-          <button className="viewBtn">View Details</button>
+          
         </div>
       </Grid>
       <Grid item xs={12}>

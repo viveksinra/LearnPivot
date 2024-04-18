@@ -1,6 +1,5 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
-import Header from "../Components/Header1/Header";
 import "./mockTest.css";
 import { Container, Typography, Grid, Breadcrumbs, Divider, Tabs, Tab, TablePagination, CircularProgress } from "@mui/material";
 import Footer from "../Components/Footer/Footer";
@@ -8,12 +7,13 @@ import { useRouter } from "next/navigation";
 import Enquiry from "@/app/Components/Enquiry/Enquiry";
 import { Dialog, useMediaQuery, useTheme, Button, DialogActions, DialogContent } from "@mui/material";
 import Slide from '@mui/material/Slide';
-import { mockTestService, myClassService } from "../services";
+import { mockTestService, myCourseService } from "../services";
 import Loading from "../Components/Loading/Loading";
 import NoResult from "../Components/NoResult/NoResult";
 import MtFilterComponent from "../Components/PublicPage/MockTest/MtFilterComponent"
 import MtFilterDialog from "../Components/PublicPage/MockTest/MtFilterDialog"
 import OneMockTest from "../Components/PublicPage/MockTest/OneMockTest"
+import Navbar from "../Components/ITStartup/Common/Navbar/Navbar";
 
 function MockTest() {
 
@@ -45,7 +45,7 @@ function MockTest() {
 
   return (
     <main style={{ backgroundColor: "#fff" }}>
-      <Header />
+      <Navbar />
 
       <br />
     
@@ -63,7 +63,7 @@ function MockTest() {
           <Grid item xs={fullScreen ? 12 : 10}>
 
         {loading ? 
-        <div className="center" style={{flexDirection:"column"}}><CircularProgress size={30}/> <Typography color="slateblue" style={{fontFamily: 'Courgette'}} variant='h6' align='center'>Loading Classes...</Typography>  </div> : rows.length === 0 ? <NoResult label="No MyClass Available"/> :  
+        <div className="center" style={{flexDirection:"column"}}><CircularProgress size={30}/> <Typography color="slateblue" style={{fontFamily: 'Courgette'}} variant='h6' align='center'>Loading Courses...</Typography>  </div> : rows.length === 0 ? <NoResult label="No MyClass Available"/> :  
             rows &&
               rows.map((p, j) => (
                 <OneMockTest data={p} key={p._id} />

@@ -17,9 +17,9 @@ const HeroSec = () => {
                   Dive into a world of knowledge with our vast array of learning resources. Whether you're a beginner or an expert, we have something for everyone. Explore new topics, sharpen your skills, and broaden your horizons. Let's embark on this journey of learning together.
                 </Typography>
                 <Box sx={{ display: 'flex', gap: '1rem', marginTop: '2rem',marginBottom: '2rem' }}>
-                <Link href="/classes" passHref>
+                <Link href="/course" passHref>
     <Button size="large" variant="contained" component="a">
-      <Typography color="white" variant="body1">Classes</Typography>
+      <Typography color="white" variant="body1">Course</Typography>
     </Button>
   </Link>
                 <Link href="/mockTest" passHref>

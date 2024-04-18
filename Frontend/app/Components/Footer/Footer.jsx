@@ -120,7 +120,31 @@ export const NewFooter = () => {
                 </Grid>
               </Grid>
             </Grid>
+            <div className="copyright-area">
+            <div className="row align-items-center">
+              <div className="col-lg-6 col-sm-6 col-md-6">
+                <p>
+                  Copyright &copy;{currentYear} Softechinfra. All rights reserved{" "}
+                  <a href="https://Softechinfra.com/" target="_blank">
+                    Softechinfra
+                  </a>
+                </p>
+              </div>
+
+              <div className="col-lg-6 col-sm-6 col-md-6">
+                <ul>
+                  <li>
+                    <Link href="/terms-and-conditions">Terms & Conditions</Link>
+                  </li>
+                  <li>
+                    <Link href="/privacy-policy">Privacy Policy</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           </Grid>
+         
         </Container>
     </section>
   )

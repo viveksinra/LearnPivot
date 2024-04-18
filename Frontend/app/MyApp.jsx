@@ -4,7 +4,6 @@ import React, { Fragment, useEffect } from 'react'
 import "./pageStyle.css";
 import { useState,Suspense  } from "react";
 // import {DARKMODE} from "./Components/Context/types"
-import Header from "./Components/Header1/Header";
 import Enquiry from "./Components/Enquiry/Enquiry";
 import Footer, {NewFooter} from "./Components/Footer/Footer";
 import {Grid, TextField, Typography,Box,Button,IconButton,InputAdornment, Container,Tabs,Tab} from '@mui/material';
@@ -14,6 +13,12 @@ import {authService} from "./services/index"
 import Loading from "./Components/Loading/Loading";
 import Hpage1 from './Components/PublicPage/HomePage/Hpage1';
 import HeroSec from './Components/PublicPage/HomePage/HeroSec';
+
+import Navbar from './Components/ITStartup/Common/Navbar/Navbar';
+import Banner from './Components/ITStartup/BannerCom/Banner';
+import ServiceCom from './Components/ITStartup/ServiceOverview/ServiceCom';
+import FeedBackCom from './Components/ITStartup/Feedback/FeedBackCom';
+import FaqCom from './Components/ITStartup/Faq/FaqCom';
 
 
 function MyApp() {  
@@ -39,17 +44,21 @@ function MyApp() {
 
   return (
     <Fragment>
-      <Header />
+      <Navbar />
       <Suspense fallback={<Loading />}>
-        <TopAbstract />
-   <HeroSec />
-        <Hpage1 />
+        <Banner />
+        <ServiceCom />
         <Box >
           <Suspense fallback={<Loading />}>
+            <FaqCom />
+            <FeedBackCom />
+          <Suspense fallback={<Loading />}>
+
             <Enquiry />
             <Suspense fallback={<Loading />}>
               <Footer />
             </Suspense>
+          </Suspense>
           </Suspense>
         </Box>
       </Suspense>

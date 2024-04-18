@@ -11,7 +11,7 @@ const MyDrawer = ({handleDrawer}) => {
 const list1 = [
   {title:"Home",icon:<FcHome/>, link:"/"},
   {title:"About Us",icon:<FcKindle/>, link:"/about"},
-  {title:"Classes",icon:<FcStackOfPhotos/>, link:"/classes"},
+  {title:"Course",icon:<FcStackOfPhotos/>, link:"/course"},
   {title:"Mock Test",icon:<FcPicture/>, link:"/mockTest"},
   {title:"Contact",icon:<FcInvite/>, link:"/contact"}]
   return (

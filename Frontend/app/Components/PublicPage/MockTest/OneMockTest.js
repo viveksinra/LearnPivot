@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Divider, Grid, Typography, Chip, Button } from "@mui/material";
-import BuyDialog from "../BuyForm/BuyDialog";
 const OneMockTest = ({ data }) => {
 
   return (
@@ -69,7 +68,6 @@ const OneMockTest = ({ data }) => {
         </Typography>
         <br />
         <div style={{ display: "flex" }}>
-        <BuyDialog />
           <span style={{ flexGrow: 0.1 }} />
           <button className="viewBtn">View Details</button>
         </div>

@@ -1,5 +1,4 @@
 "use client";
-import Header from "../Components/Header1/Header";
 import "./loginStyle.css";
 import { TopAbstract } from "../MyApp";
 import { LOGIN_USER } from "../Components/Context/types";
@@ -22,6 +21,7 @@ import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useLogin } from "../hooks/auth/useLogin";
 import CircularProgress from "@mui/material/CircularProgress";
+import Navbar from "../Components/ITStartup/Common/Navbar/Navbar";
 // import { useCurrentUser } from "../hooks/auth/useCurrentUser";
 
 function Login() {
@@ -73,7 +73,7 @@ function Login() {
   // } else
   return (
     <main>
-      <Header />
+      <Navbar />
       <TopAbstract />
       <div id="loginBg" style={{ backgroundColor: "#fff" }}>
         <Grid container>
