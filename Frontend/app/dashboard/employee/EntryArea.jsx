@@ -8,7 +8,7 @@ import {allStates,allGenders,allJobRole, todayDate} from "../../Components/Stati
 import { FcLikePlaceholder, FcLike,FcExpand,FcSearch,FcDocument } from "react-icons/fc";
 import {MdDeleteForever} from "react-icons/md";
 import { useImgUpload } from '@/app/hooks/auth/useImgUpload';
-import { prospectService } from "../../services";
+import { myCourseService } from "../../services";
 import { useRouter } from "next/navigation";
 import axios from 'axios';
 
@@ -51,7 +51,7 @@ const EntryArea = forwardRef((props, ref) => {
       useEffect(() => {
          getCommunity()
           async function getCommunity(){
-            let res = await prospectService.getScheduleLeave("api/v1/main/community/getCommunity/dropDown");
+            let res = await myCourseService.getScheduleLeave("api/v1/main/community/getCommunity/dropDown");
             if(res.variant ==="success"){
               setAllCommunity(res.data)
             }
@@ -62,7 +62,7 @@ const EntryArea = forwardRef((props, ref) => {
    
     useEffect(() => {
       async function getOneData(){
-      let res = await prospectService.getAll(`${props.id}`);
+      let res = await myCourseService.getAll(`${props.id}`);
       if(res.variant === "success"){
       props.setId(res.data._id);
       setImp(res.data.important);
@@ -149,7 +149,7 @@ const EntryArea = forwardRef((props, ref) => {
            try {
             let employeeData = { _id: props.id,important,cummunity, applicationDate, interviewDate,physicalHiringDate,jobRole, employeeStage,employeeScore,docUrl,message,firstName,lastName,dateOfBirth:DOB,gender,phone:mobile,email,ssNumber, streetAddress:street,unit,home, office, city:city?.city,state,zipCode:zip, };
             let response;
-            response = await prospectService.saveTask(`api/v1/employee/basic/addEmployee/${props.id}`, employeeData);
+            response = await myCourseService.saveTask(`api/v1/employee/basic/addEmployee/${props.id}`, employeeData);
             if(response.variant === "success"){
               snackRef.current.handleSnack(response);
               handleClear();
@@ -181,7 +181,7 @@ const EntryArea = forwardRef((props, ref) => {
       try {
         let yes = confirm(`Do you really want to Permanently Delete - ${firstName} ${lastName} ?`)
         if(yes){
-          let response = await prospectService.deleteLeave(`api/v1/enquiry/prospect/addProspect/deleteOne/${props.id}`);
+          let response = await myCourseService.deleteLeave(`api/v1/enquiry/prospect/addProspect/deleteOne/${props.id}`);
           if(response.variant === "success"){
             snackRef.current.handleSnack(response);
             handleClear();

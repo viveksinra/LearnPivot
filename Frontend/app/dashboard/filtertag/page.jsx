@@ -5,7 +5,7 @@ import {Grid,Typography,IconButton,TextField,Button,Breadcrumbs,ButtonGroup, Inp
 import { FcCheckmark,FcHome,FcFullTrash,FcNext, FcTemplate } from "react-icons/fc";
 import {MdEditNote} from "react-icons/md";
 import MySnackbar from "../../Components/MySnackbar/MySnackbar";
-import { prospectService } from "../../services";
+import { myCourseService } from "../../services";
 import clsx from 'clsx';
 
 const AddCommunity = lazy(() => import("./AddCommunity"));
@@ -23,7 +23,7 @@ function BuildingLayout() {
     const snackRef = useRef();
 
     const getCommunity = async () => {
-      let res = await prospectService.getScheduleLeave("api/v1/main/community/getCommunity/getAll");
+      let res = await myCourseService.getScheduleLeave("api/v1/main/community/getCommunity/getAll");
       if(res.variant ==="success"){
         setCommunity(res.data)
 
@@ -35,7 +35,7 @@ function BuildingLayout() {
 
     const getFloor = async ()=>{
       setLoadingFloor(true)
-      let res = await prospectService.moveToResident("api/v1/main/seat/getSeat/get/floor", "",{communityId:actCommunity?._id});
+      let res = await myCourseService.moveToResident("api/v1/main/seat/getSeat/get/floor", "",{communityId:actCommunity?._id});
       if(res.variant ==="success"){
         setLoadingFloor(false)
         setFloor(res.data)
@@ -112,7 +112,7 @@ function BuildingLayout() {
         if(b.label){
           try {
             let acti = floor.filter(f=>f.active)
-            let res = await prospectService.moveToResident(`api/v1/main/seat/addSeat/save/floor`, b._id, {communityId:actCommunity._id, floor:acti[0]});
+            let res = await myCourseService.moveToResident(`api/v1/main/seat/addSeat/save/floor`, b._id, {communityId:actCommunity._id, floor:acti[0]});
             if(res.variant==="success"){
               snackRef.current.handleSnack(res);
               getFloor();
@@ -141,7 +141,7 @@ function BuildingLayout() {
               let y = confirm(`Are you sure to Permanently Delete : ${b.communityName} ?`)
               if(y){
                 try {
-                  let res = await prospectService.deleteLeave(`api/v1/publicMaster/filterTag/addFilterTag/deleteOne/${b._id}`);
+                  let res = await myCourseService.deleteLeave(`api/v1/publicMaster/filterTag/addFilterTag/deleteOne/${b._id}`);
                   if(res.variant ==="success"){
                     snackRef.current.handleSnack(res);
                     getcommunity()
@@ -166,7 +166,7 @@ function BuildingLayout() {
             let y = confirm(`Are you sure to Permanently Delete : ${b.label} ?`)
             if(y){
               try {
-                let res = await prospectService.deleteLeave(`api/v1/main/seat/addSeat/deleteOne/${b._id}`);
+                let res = await myCourseService.deleteLeave(`api/v1/main/seat/addSeat/deleteOne/${b._id}`);
                 if(res.variant ==="success"){
                   snackRef.current.handleSnack(res);
                   if(name === "floor"){

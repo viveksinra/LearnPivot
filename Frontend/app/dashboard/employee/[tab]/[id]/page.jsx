@@ -12,7 +12,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import {MdVisibility, MdVisibilityOff} from "react-icons/md";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { employeeService,prospectService } from "../../../../services";
+import { employeeService,myCourseService } from "../../../../services";
 import axios from 'axios';
 
 const PersonalInfo = forwardRef((props, ref)=>{
@@ -86,7 +86,7 @@ const PersonalInfo = forwardRef((props, ref)=>{
     useEffect(() => {
       async function getBuildingData(){
         if(building===null){
-          let res = await prospectService.moveToResident("api/v1/main/seat/getSeat/get/building", "",);
+          let res = await myCourseService.moveToResident("api/v1/main/seat/getSeat/get/building", "",);
           setAllBulding([{_id:"all",houseNo:"All",label:"All Buildings"},...res.data]);
         }
      }
@@ -96,7 +96,7 @@ const PersonalInfo = forwardRef((props, ref)=>{
     useEffect(() => {
       async function getSenior(){
         if(jobRole){
-          let res = await prospectService.getAll(`api/v1/employee/empLeave/getEmpLeave/dropDown/getByRole/${jobRole?.id}`, "",);
+          let res = await myCourseService.getAll(`api/v1/employee/empLeave/getEmpLeave/dropDown/getByRole/${jobRole?.id}`, "",);
           if(res?.variant ==="success"){
             setAllSenior(res.data)
           }
