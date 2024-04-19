@@ -6,8 +6,7 @@ import { allStates } from "../StaticData";
 import { FcFeedback,FcApproval } from "react-icons/fc";
 import Link from 'next/link';
 import {authService} from "../../services/index";
-import axios from "axios";
-import { sendGAEvent } from '@next/third-parties/google'
+
 
 const Enquiry = () => {
   const [enquiryFor, setEnquiryFor]=useState("self");
