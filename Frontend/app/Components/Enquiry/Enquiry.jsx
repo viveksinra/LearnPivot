@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./enquiryStyle.css";
 import {Container, Grid, Typography,TextField,RadioGroup,FormControlLabel,Radio,Autocomplete ,Fab,MenuItem,InputAdornment,CircularProgress,Alert, Divider } from '@mui/material/';
-import { allStates } from "../StaticData";
+
 import { FcFeedback,FcApproval } from "react-icons/fc";
 import Link from 'next/link';
 import {authService} from "../../services/index";
